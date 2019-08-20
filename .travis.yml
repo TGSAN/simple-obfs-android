@@ -51,13 +51,13 @@ script:
     - $SBTPATH/sbt android:package
 
 before_deploy:
-      - git config --local user.name "xiuluo"
-      - git config --local user.email "chen919695074@gmail.com"
+      - git config --local user.name "xianren78"
+      - git config --local user.email "qgtxqj@gmail.com"
       - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
       - find $HOME/ -name "obfs-local-debug.apk" -exec mv {} $HOME/ \;
 deploy:
   provider: releases
   api_key:
-    secure: "jprWzHU3QzgftyKPG09+p2gFK678mL+J8mk6I53XP6ELiN/YJ/iH2OueYIjK3fBFRaDGqNMNe7vCP2gj3OCyT8BdgwDjb2UKENhs3h1CGYPGrCaukN6l2eITGg3Ii/vepdShWC3doyl45zMecKgVS0Gx+JH+HrjoUwrekgH4IDHmkATQz3M1NZ713ebVAEmn0xYGmOr2oJFpULpf8BvM4aec8g6fAVUMdrCQKtdYkgOp7c6YZbrTJIUW4FujBrOuGB0Ou8ZYV+2zid9M3rLEkmCDr/xPL8XVf4UYD+EhP5q//fPCyK5qIdZBaM7sJtHsz2UNy9vdaC0NdOM/JOAcxj5RCi/uZuguHhemzETzdmqZlWBaWbHT5UP+49gwBh7nWHF0mQx1aynFn3E2CtWBEEoA3Zu/69FNWwqUlNTRj4OU51lFndv8fBIjC7opJpFezbahmnz35fgrYLLrqXLFU5/jKAC9izbCqhix16vEcOaKrRJ6nGhxwC6zhmO2ayAcz6NwaEc/7Ivj7r+EQikJhZOwZOG82oi1O4FxbNefOqdhNSLlorge39mVCUAB8z8XRvIHX98x/Z6VDVQmRsmcY5L03V0Pb+1yZaPQmqen1Dv+8Z75tXjqI8StL8D+eTv5w66ozULRwiqo61u7A/uj6jw61hglhcdEpf9dSSZX37I="
+    secure: "bwMT8eM3VFzT9428hF11FInMcPE74nE/fvA/ltVz5szLJD4+cuCndPukpX1xDaH0Q1a1DFpnDQ20e/dMTwY4VjE7tJ9EMiba753L3YqfifnXm8lNk+UpQYyjvTDHvPBFsTdU0fsxwEt4d+yEXbXgtC2jhEv8T5Wz6zhGbKXY2Km6JfVsFcFumvYYt+Fkr7VELUPQ/5UBbN+HXXm9fAlWod25AH9a2OgztxRB4UwY+b92W/U7Uhfw/rQn3FbTJS82791jLsVSNxcYiOcmj5SKABCNHdGVSrBWuTf7AEgJ+or7Tu3ymSE0+cm5f3qN/Ii0epq5JIwh2i7DeBjAuMda5Ygddg7OtZRvTK+XIYBuZikHyZbDc1VfdV7rQA6LsEJ/ewelT6PMPVVubDmHN9HvCeuw/JHQKg7PDXEmBL3il26Wq7Bha4WP4nAHWJOkf7W/gWKApOJ33mLba4eirHlW1z74f1HQw4sztesl2bux+Oi3lEbK3HU83u4g0dsAUK8jtFXVGBtdIBHTIrxiiQu0gJInP+F7d7uzhHwQXxyAz//6toWL1w8vt7QADYdtvdyxJ5134RunZ9C0cuvO9w99SrSzawjvEsEyw8TJ/1BPmDdYVDhkRB/TM1dz+bOQglzT+mxovzwiWuX8QcpU6JA61xNjbRIOaRcy1Rn3XoQyTxo="
   file: "$HOME/obfs-local-debug.apk"
   skip_cleanup: true
