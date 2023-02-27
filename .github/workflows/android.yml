@@ -1,0 +1,47 @@
+name: Build Workflow
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: '${{ matrix.os }}'
+    strategy:
+      matrix:
+        os:
+          - ubuntu-22.04
+    steps:
+      - name: Cache multiple paths
+        uses: actions/cache@v2
+        with:
+          path: |-
+            $HOME/.ivy2
+            $HOME/.sbt
+          key: '${{ runner.os }}-${{ hashFiles(''TODO'') }}'
+      - uses: actions/checkout@v2
+      - run: |
+          if [ ! -d "$ANDROID_NDK_HOME" ]; then
+              mkdir -p $ANDROID_NDK_HOME;
+              pushd $HOME/.android;
+              export ARCH=`uname -m`;
+              wget -q http://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-linux-${ARCH}.zip;
+              unzip -q android-ndk-${NDK_VERSION}-linux-${ARCH}.zip;
+              popd;
+          fi
+      - run: |
+          if [ ! -f "$SBTPATH/sbt" ]; then
+              pushd $SBTPATH;
+              wget -q https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt;
+              chmod a+x sbt;
+              popd;
+          fi
+      - run: '$SBTPATH/sbt android:package'
+      
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: obfs-local
+          path: $HOME/obfs-local-debug.apk
